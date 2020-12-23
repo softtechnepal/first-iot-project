@@ -17,8 +17,8 @@ namespace Real_time_With_Read_Holding_Registers
         {
             try
             {
-                const uint NumberofPoints = 20;
-                modbusRTUProtocol = new ModbusRTUProtocol(NumberofPoints);
+                const uint _numberofPoints = 20;
+                modbusRTUProtocol = new ModbusRTUProtocol(_numberofPoints);
                 lbl40000.DataBindings.Add("Text", modbusRTUProtocol.Registers[0], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
                 lbl40001.DataBindings.Add("Text", modbusRTUProtocol.Registers[1], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
                 lbl40002.DataBindings.Add("Text", modbusRTUProtocol.Registers[2], "Address", true, DataSourceUpdateMode.OnPropertyChanged);

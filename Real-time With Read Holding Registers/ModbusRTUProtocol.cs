@@ -11,10 +11,10 @@ namespace Real_time_With_Read_Holding_Registers
 {
     public class ModbusRTUProtocol
     {
-        private byte slaveAddress = 01;
-        private byte function = 03;
-        private ushort startAddress = 40000;
-        private uint _NumberOfPoints;
+        private byte slaveAddress = 1;
+        private byte function = 3;
+        private ushort startAddress = 40001;
+        private uint _NumberOfPoints = 20;
 
         private SerialPort serialPort1 = null;
         private List<Register> _Registers = new List<Register>();
@@ -32,9 +32,8 @@ namespace Real_time_With_Read_Holding_Registers
         {
             try
             {
-                serialPort1 = new SerialPort("COM22", 9600, Parity.None, 8, StopBits.One);
+                serialPort1 = new SerialPort("COM31", 9600, Parity.None, 8, StopBits.One);
                 serialPort1.Open();
-
                 ThreadPool.QueueUserWorkItem(new WaitCallback((obj) =>
                 {
                     while (true)
@@ -75,11 +74,6 @@ namespace Real_time_With_Read_Holding_Registers
             {
                 throw ex;
             }
-            /*finally
-            {
-                if (serialPort1.IsOpen)
-                    serialPort1.Close();
-            }*/
         }
 
         /// <summary>
@@ -91,6 +85,7 @@ namespace Real_time_With_Read_Holding_Registers
         /// <param name="function">Function</param>
         /// <param name="numberOfPoints">Quantity of inputs</param>
         /// <returns>Byte Array</returns>
+        /// unint
         private byte[] ReadHoldingRegistersMsg(byte slaveAddress, ushort startAddress, byte function, uint numberOfPoints)
         {
             byte[] frame = new byte[8];
