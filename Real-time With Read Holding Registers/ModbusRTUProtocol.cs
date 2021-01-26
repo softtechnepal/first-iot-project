@@ -18,6 +18,7 @@ namespace Real_time_With_Read_Holding_Registers
 
         private SerialPort serialPort1 = null;
         private List<Register> _Registers = new List<Register>();
+        private List<TestData> _TestDatas = new List<TestData>();
 
         public ModbusRTUProtocol(uint numberOfPoints)
         {
@@ -25,6 +26,8 @@ namespace Real_time_With_Read_Holding_Registers
             for (ushort i = 0; i < NumberOfPoints; i++)
             {
                 Registers.Add(new Register() { Address = (ushort)(startAddress + i) });
+                TestDatas.Add(new TestData() { Address = (byte)(startAddress + i) });
+
             }
         }
 
@@ -32,7 +35,7 @@ namespace Real_time_With_Read_Holding_Registers
         {
             try
             {
-                serialPort1 = new SerialPort("COM31", 9600, Parity.None, 8, StopBits.One);
+                serialPort1 = new SerialPort("COM23", 9600, Parity.None, 8, StopBits.One);
                 serialPort1.Open();
                 ThreadPool.QueueUserWorkItem(new WaitCallback((obj) =>
                 {
@@ -40,7 +43,7 @@ namespace Real_time_With_Read_Holding_Registers
                     {
                         if (serialPort1.IsOpen)
                         {
-                            byte[] frame = ReadHoldingRegistersMsg(slaveAddress, startAddress, function, NumberOfPoints);
+                            byte[] frame = ReadHoldingRegistersMsg(slaveAddress, 0, function, NumberOfPoints);
                             serialPort1.Write(frame, 0, frame.Length);
                             Thread.Sleep(100); // Delay 100ms
                             if (serialPort1.BytesToRead >= 5)
@@ -52,11 +55,15 @@ namespace Real_time_With_Read_Holding_Registers
                                 // Process data.
                                 byte[] data = new byte[bufferReceiver.Length - 5];
                                 Array.Copy(bufferReceiver, 3, data, 0, data.Length);
+
                                 UInt16[] result = Word.ByteToUInt16(data);
+                                byte[] name = new byte[bufferReceiver.Length - 5];
                                 for (int i = 0; i < result.Length; i++)
                                 {
                                     try
                                     {
+                                        TestDatas[i].Value = data[i];
+                                        name[i] = data[i];
                                         Registers[i].Value = result[i];
                                     }
                                     catch (Exception ex)
@@ -140,6 +147,18 @@ namespace Real_time_With_Read_Holding_Registers
             set
             {
                 _Registers = value;
+            }
+        }
+        public List<TestData> TestDatas
+        {
+            get
+            {
+                return _TestDatas;
+            }
+
+            set
+            {
+                _TestDatas = value;
             }
         }
 

@@ -27,3 +27,13 @@ D:\IOT Projects\My Projects\2Second Read Holding Registers\Real-time With Read H
 D:\IOT Projects\My Projects\2Second Read Holding Registers\Real-time With Read Holding Registers\Real-time With Read Holding Registers\obj\Debug\Real-time With Read Holding Registers.csproj.CoreCompileInputs.cache
 D:\IOT Projects\My Projects\2Second Read Holding Registers\Real-time With Read Holding Registers\Real-time With Read Holding Registers\obj\Debug\Real-time With Read Holding Registers.exe
 D:\IOT Projects\My Projects\2Second Read Holding Registers\Real-time With Read Holding Registers\Real-time With Read Holding Registers\obj\Debug\Real-time With Read Holding Registers.pdb
+C:\prg\IOT\data read only\iot-project-modbus\Real-time With Read Holding Registers\bin\Debug\Real-time With Read Holding Registers.exe.config
+C:\prg\IOT\data read only\iot-project-modbus\Real-time With Read Holding Registers\bin\Debug\Real-time With Read Holding Registers.exe
+C:\prg\IOT\data read only\iot-project-modbus\Real-time With Read Holding Registers\bin\Debug\Real-time With Read Holding Registers.pdb
+C:\prg\IOT\data read only\iot-project-modbus\Real-time With Read Holding Registers\obj\Debug\Real-time With Read Holding Registers.csprojAssemblyReference.cache
+C:\prg\IOT\data read only\iot-project-modbus\Real-time With Read Holding Registers\obj\Debug\Real_time_With_Read_Holding_Registers.FormModbusRTU.resources
+C:\prg\IOT\data read only\iot-project-modbus\Real-time With Read Holding Registers\obj\Debug\Real_time_With_Read_Holding_Registers.Properties.Resources.resources
+C:\prg\IOT\data read only\iot-project-modbus\Real-time With Read Holding Registers\obj\Debug\Real-time With Read Holding Registers.csproj.GenerateResource.cache
+C:\prg\IOT\data read only\iot-project-modbus\Real-time With Read Holding Registers\obj\Debug\Real-time With Read Holding Registers.csproj.CoreCompileInputs.cache
+C:\prg\IOT\data read only\iot-project-modbus\Real-time With Read Holding Registers\obj\Debug\Real-time With Read Holding Registers.exe
+C:\prg\IOT\data read only\iot-project-modbus\Real-time With Read Holding Registers\obj\Debug\Real-time With Read Holding Registers.pdb

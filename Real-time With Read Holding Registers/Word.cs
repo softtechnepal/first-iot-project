@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Real_time_With_Read_Holding_Registers
 {
@@ -41,6 +43,44 @@ namespace Real_time_With_Read_Holding_Registers
         {
             return (UInt16)(HiVal * 256 + LoVal);
         }
+
+        public static List<String> DecToString(ushort num)
+        {
+            string result = DecToBinary(num).ToString();
+
+            List<string> results = new List<string>(result.Trim().Split(' '));
+            List<int> bits = results.ConvertAll(int.Parse);
+
+            List<String> one_register = new List<string>();
+            List<List<String>> final_result = new List<List<string>>();
+            foreach(int bit in bits)
+            {
+                if(bit == 0)
+                {
+                    one_register.Add("Manual");
+                }
+                else
+                {
+                    one_register.Add("Auto");
+                }
+            }
+            final_result.Add(one_register);
+            return one_register;
+        }
+        private static StringBuilder DecToBinary(ushort n)
+        {
+            var result = new StringBuilder();
+            for (int i = 15; i >= 0; i--)
+            {
+                int k = n >> i;
+                if ((k & 1) > 0)
+                    result.Append("1 ");
+                else
+                    result.Append("0 ");
+            }
+            return result;
+        }
+
 
         public static UInt16[] ByteToUInt16(byte[] bytes)
         {

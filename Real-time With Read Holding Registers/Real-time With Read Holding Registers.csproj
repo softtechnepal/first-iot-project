@@ -57,6 +57,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.cs" />
+    <Compile Include="TestData.cs" />
     <Compile Include="Word.cs" />
     <EmbeddedResource Include="FormModbusRTU.resx">
       <DependentUpon>FormModbusRTU.cs</DependentUpon>
