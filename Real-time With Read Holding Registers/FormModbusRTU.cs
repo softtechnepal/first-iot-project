@@ -55,17 +55,15 @@ namespace Real_time_With_Read_Holding_Registers
             Binding binding = new Binding("Text", modbusRTUProtocol.Registers[0], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
             binding.Parse += new ConvertEventHandler(ToInt);
 
-            String name = null;
-
 
             txt40000.DataBindings.Add(new Binding("Text", modbusRTUProtocol.Registers[0], "Value", true, DataSourceUpdateMode.OnPropertyChanged));
 
-            txt40001.DataBindings.Add("Text", modbusRTUProtocol.Registers[1], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
 
-            txt40002.DataBindings.Add("Text", modbusRTUProtocol.TestDatas[2], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40003.DataBindings.Add("Text", modbusRTUProtocol.TestDatas[3], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
-            
-            
+
+            txt40001.DataBindings.Add("Text", modbusRTUProtocol.RegistersCopy[0], "Value1", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40002.DataBindings.Add("Text", modbusRTUProtocol.RegistersCopy[1], "Value2", true, DataSourceUpdateMode.OnPropertyChanged);
+
+            txt40003.DataBindings.Add("Text", modbusRTUProtocol.Registers[3], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
             txt40004.DataBindings.Add("Text", modbusRTUProtocol.Registers[4], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
             txt40005.DataBindings.Add("Text", modbusRTUProtocol.Registers[5], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
             txt40006.DataBindings.Add("Text", modbusRTUProtocol.Registers[6], "Value", true, DataSourceUpdateMode.OnPropertyChanged);

@@ -44,7 +44,7 @@ namespace Real_time_With_Read_Holding_Registers
             return (UInt16)(HiVal * 256 + LoVal);
         }
 
-        public static List<String> DecToString(ushort num)
+        public static List<String> /*string */DecToString(ushort num)
         {
             string result = DecToBinary(num).ToString();
 
@@ -53,9 +53,9 @@ namespace Real_time_With_Read_Holding_Registers
 
             List<String> one_register = new List<string>();
             List<List<String>> final_result = new List<List<string>>();
-            foreach(int bit in bits)
+            foreach (int bit in bits)
             {
-                if(bit == 0)
+                if (bit == 0)
                 {
                     one_register.Add("Manual");
                 }
@@ -81,7 +81,17 @@ namespace Real_time_With_Read_Holding_Registers
             return result;
         }
 
+        public static ushort[] ByteToBinary(byte[] bytes)
+        {
+            ushort[] name = new ushort[bytes.Length / 2];
+            int counter = 0;
 
+            for (int cnt = 0; cnt < bytes.Length / 2; cnt++)
+                name[cnt] = FromByteArray(new byte[] { bytes[counter++], bytes[counter++] });
+
+            // string yourByteString = Convert.ToString(bytes).PadLeft(16, '0');
+            return name;
+        }
         public static UInt16[] ByteToUInt16(byte[] bytes)
         {
             UInt16[] values = new UInt16[bytes.Length / 2];

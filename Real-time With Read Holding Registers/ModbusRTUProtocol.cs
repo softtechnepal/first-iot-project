@@ -18,6 +18,7 @@ namespace Real_time_With_Read_Holding_Registers
 
         private SerialPort serialPort1 = null;
         private List<Register> _Registers = new List<Register>();
+        private List<RegisterCopy> _RegistersCopy = new List<RegisterCopy>();
         private List<TestData> _TestDatas = new List<TestData>();
 
         public ModbusRTUProtocol(uint numberOfPoints)
@@ -26,8 +27,9 @@ namespace Real_time_With_Read_Holding_Registers
             for (ushort i = 0; i < NumberOfPoints; i++)
             {
                 Registers.Add(new Register() { Address = (ushort)(startAddress + i) });
+                RegistersCopy.Add(new RegisterCopy() { Address = (ushort)(startAddress + i) });
                 TestDatas.Add(new TestData() { Address = (byte)(startAddress + i) });
-
+                // TestDatas.Add(new TestData() { Value = (string)(startAddress + i) });
             }
         }
 
@@ -57,14 +59,41 @@ namespace Real_time_With_Read_Holding_Registers
                                 Array.Copy(bufferReceiver, 3, data, 0, data.Length);
 
                                 UInt16[] result = Word.ByteToUInt16(data);
+
+
                                 byte[] name = new byte[bufferReceiver.Length - 5];
                                 for (int i = 0; i < result.Length; i++)
                                 {
                                     try
                                     {
-                                        TestDatas[i].Value = data[i];
-                                        name[i] = data[i];
+                                        List<string> final_result = Word.DecToString(result[1]);
+                                        RegistersCopy[0].Value1 = final_result[0];
+                                        RegistersCopy[1].Value2 = final_result[1];
+                                        /*if (i == 1)
+                                        {
+                                            *//*List<string> final_result = Word.DecToString(result[i]);
+                                            foreach (string value in final_result)
+                                            {
+                                                RegistersCopy[i].Value1 = value;
+                                            }*//*
+                                            List<string> final_result = Word.DecToString(result[i]);
+                                            foreach (string inum in final_result)
+                                            {
+                                                RegistersCopy[0].Value1 = inum;//final_result[0];
+                                                RegistersCopy[1].Value2 = final_result[1];
+                                            }
+                                            
+                                        }*/
+                                        /*if (i == 2)
+                                        {
+                                            List<string> final_result = Word.DecToString(result[i]);
+                                            foreach (string value in final_result)
+                                            {
+                                                RegistersCopy[i].Value2 = value;
+                                            }
+                                        }*/
                                         Registers[i].Value = result[i];
+                                        TestDatas[i].Value = result[i];
                                     }
                                     catch (Exception ex)
                                     {
@@ -149,6 +178,20 @@ namespace Real_time_With_Read_Holding_Registers
                 _Registers = value;
             }
         }
+
+        public List<RegisterCopy> RegistersCopy
+        {
+            get
+            {
+                return _RegistersCopy;
+            }
+
+            set
+            {
+                _RegistersCopy = value;
+            }
+        }
+
         public List<TestData> TestDatas
         {
             get
