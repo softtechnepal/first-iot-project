@@ -60,8 +60,9 @@ namespace Real_time_With_Read_Holding_Registers
 
 
 
-            txt40001.DataBindings.Add("Text", modbusRTUProtocol.RegistersCopy[0], "Value1", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40002.DataBindings.Add("Text", modbusRTUProtocol.RegistersCopy[1], "Value2", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40001.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[0], "Value0", true, DataSourceUpdateMode.OnPropertyChanged);
+            //txt40001.DataBindings.Add("Text", modbusRTUProtocol.RegistersCopy[1], "Value1", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40002.DataBindings.Add("Text", modbusRTUProtocol.RegistersCopy[2], "Value1", true, DataSourceUpdateMode.OnPropertyChanged);
 
             txt40003.DataBindings.Add("Text", modbusRTUProtocol.Registers[3], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
             txt40004.DataBindings.Add("Text", modbusRTUProtocol.Registers[4], "Value", true, DataSourceUpdateMode.OnPropertyChanged);

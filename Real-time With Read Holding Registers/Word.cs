@@ -67,7 +67,7 @@ namespace Real_time_With_Read_Holding_Registers
             final_result.Add(one_register);
             return one_register;
         }
-        private static StringBuilder DecToBinary(ushort n)
+        public static StringBuilder DecToBinary(ushort n)
         {
             var result = new StringBuilder();
             for (int i = 15; i >= 0; i--)
@@ -99,6 +99,63 @@ namespace Real_time_With_Read_Holding_Registers
             for (int cnt = 0; cnt < bytes.Length / 2; cnt++)
                 values[cnt] = FromByteArray(new byte[] { bytes[counter++], bytes[counter++] });
             return values;
+        }
+
+        public static string[] ByteToString(byte[] bytes)
+        {
+            string[] booleans = new string[bytes.Length / 2];
+            int counter = 0;
+            for (int cnt = 0; cnt < bytes.Length / 2; cnt++)
+                booleans[cnt] = FromBytesString(new byte[] { bytes[counter++], bytes[counter++] });
+            return booleans;
+        }
+
+        public static List<List<string>> BinaryValue(byte[] bytes)
+        {
+            string[] binary = ByteToString(bytes);
+            List<List<string>> secVal = new List<List<string>>();
+            List<string> frtVal = new List<string>();
+
+            /*foreach (string value in binary)
+            {
+                List<string> results = new List<string>(value.Split(' '));
+                for (int i = 0; i < results.Count - 1; i++)
+                {
+                    if (results[i] == "0")
+                    {
+                        results[i] = "Manual";
+                    }
+                    else
+                    {
+                        results[i] = "Auto";
+                    }
+                }
+                secVal.Add(results);
+            }*/
+            for (int i = 0; i < binary.Length; i++)
+            {
+                frtVal.Clear();
+                foreach (char num in binary[i])
+                {
+                    /*if (num == '0')
+                    {
+                        frtVal.Add("manual");
+                    }
+                    else
+                    {
+                        frtVal.Add("auto");
+                    }*/
+                    frtVal.Add(num.ToString());
+                }
+                secVal.Add(frtVal);
+            }
+            return secVal;
+        }
+
+
+        private static string FromBytesString(byte[] bytes)
+        {
+            return Convert.ToString(bytes[1], 2).PadLeft(16, '0');
         }
     }
 }

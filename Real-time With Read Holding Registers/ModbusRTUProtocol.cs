@@ -19,7 +19,7 @@ namespace Real_time_With_Read_Holding_Registers
         private SerialPort serialPort1 = null;
         private List<Register> _Registers = new List<Register>();
         private List<RegisterCopy> _RegistersCopy = new List<RegisterCopy>();
-        private List<TestData> _TestDatas = new List<TestData>();
+        private List<RegisterValue> _RegistersValue = new List<RegisterValue>();
 
         public ModbusRTUProtocol(uint numberOfPoints)
         {
@@ -28,8 +28,7 @@ namespace Real_time_With_Read_Holding_Registers
             {
                 Registers.Add(new Register() { Address = (ushort)(startAddress + i) });
                 RegistersCopy.Add(new RegisterCopy() { Address = (ushort)(startAddress + i) });
-                TestDatas.Add(new TestData() { Address = (byte)(startAddress + i) });
-                // TestDatas.Add(new TestData() { Value = (string)(startAddress + i) });
+                RegistersValue.Add(new RegisterValue() { Address = (ushort)(startAddress + i) });
             }
         }
 
@@ -62,42 +61,68 @@ namespace Real_time_With_Read_Holding_Registers
 
 
                                 byte[] name = new byte[bufferReceiver.Length - 5];
+                                string[] binary = Word.ByteToString(data);
+                                List<List<string>> binaryWithValue = Word.BinaryValue(data);
+                                for(int i = 0; i < binaryWithValue.Count; i++)
+                                {
+                                    for (int j = 0; j < binaryWithValue[i].Count; j++)
+                                    {
+                                        RegistersValue[i].Value0 = binaryWithValue[i][j];
+                                    }
+                                }
+
                                 for (int i = 0; i < result.Length; i++)
                                 {
                                     try
                                     {
-                                        List<string> final_result = Word.DecToString(result[1]);
-                                        RegistersCopy[0].Value1 = final_result[0];
-                                        RegistersCopy[1].Value2 = final_result[1];
-                                        /*if (i == 1)
+                                        /*foreach(char num in binary[i])
                                         {
-                                            *//*List<string> final_result = Word.DecToString(result[i]);
-                                            foreach (string value in final_result)
+                                            if (num == '0')
                                             {
-                                                RegistersCopy[i].Value1 = value;
-                                            }*//*
-                                            List<string> final_result = Word.DecToString(result[i]);
-                                            foreach (string inum in final_result)
-                                            {
-                                                RegistersCopy[0].Value1 = inum;//final_result[0];
-                                                RegistersCopy[1].Value2 = final_result[1];
+                                                RegistersValue[i].Value0 = "Manual";
+                                                RegistersValue[i].Value1= "Manual";
+                                                RegistersValue[i].Value2 = "Manual";
+                                                RegistersValue[i].Value3 = "Manual";
+                                                RegistersValue[i].Value4 = "Manual";
+                                                RegistersValue[i].Value5 = "Manual";
+                                                RegistersValue[i].Value6 = "Manual";
+                                                RegistersValue[i].Value7 = "Manual";
+                                                RegistersValue[i].Value8 = "Manual";
+                                                RegistersValue[i].Value9 = "Manual";
+                                                RegistersValue[i].Value10 = "Manual";
+                                                RegistersValue[i].Value11 = "Manual";
+                                                RegistersValue[i].Value12 = "Manual";
+                                                RegistersValue[i].Value13 = "Manual";
+                                                RegistersValue[i].Value14 = "Manual";
+                                                RegistersValue[i].Value15 = "Manual";
+
                                             }
-                                            
-                                        }*/
-                                        /*if (i == 2)
-                                        {
-                                            List<string> final_result = Word.DecToString(result[i]);
-                                            foreach (string value in final_result)
+                                            else
                                             {
-                                                RegistersCopy[i].Value2 = value;
+                                                RegistersValue[i].Value0 = "Auto";
+                                                RegistersValue[i].Value1 = "Auto";
+                                                RegistersValue[i].Value2 = "Auto";
+                                                RegistersValue[i].Value3 = "Auto";
+                                                RegistersValue[i].Value4 = "Auto";
+                                                RegistersValue[i].Value5 = "Auto";
+                                                RegistersValue[i].Value6 = "Auto";
+                                                RegistersValue[i].Value7 = "Auto";
+                                                RegistersValue[i].Value8 = "Auto";
+                                                RegistersValue[i].Value9 = "Auto";
+                                                RegistersValue[i].Value10 = "Auto";
+                                                RegistersValue[i].Value11 = "Auto";
+                                                RegistersValue[i].Value12 = "Auto";
+                                                RegistersValue[i].Value13 = "Auto";
+                                                RegistersValue[i].Value14 = "Auto";
+                                                RegistersValue[i].Value15 = "Auto";
                                             }
                                         }*/
+                                        RegistersCopy[i].Value1 = binary[i];
                                         Registers[i].Value = result[i];
-                                        TestDatas[i].Value = result[i];
                                     }
                                     catch (Exception ex)
                                     {
-                                        MessageBox.Show(ex.Message);
+                                        MessageBox.Show("From Here " + ex.Message);
                                     }
                                 }
                             }
@@ -112,6 +137,7 @@ namespace Real_time_With_Read_Holding_Registers
             }
         }
 
+        // RegistersCopy[i].Value1 = Word.DecToBinary(result[1]).ToString();
         /// <summary>
         /// Function 03 (03hex) Read Holding Registers
         /// Read the binary contents of holding registers in the slave.
@@ -191,17 +217,16 @@ namespace Real_time_With_Read_Holding_Registers
                 _RegistersCopy = value;
             }
         }
-
-        public List<TestData> TestDatas
+        public List<RegisterValue> RegistersValue
         {
             get
             {
-                return _TestDatas;
+                return _RegistersValue;
             }
 
             set
             {
-                _TestDatas = value;
+                _RegistersValue = value;
             }
         }
 
@@ -218,4 +243,29 @@ namespace Real_time_With_Read_Holding_Registers
             }
         }
     }
+    /*RegistersCopy[0].Value1 = final_result[0];
+                                        RegistersCopy[1].Value2 = final_result[1];*/
+    /*if (i == 1)
+    {
+        *//*List<string> final_result = Word.DecToString(result[i]);
+        foreach (string value in final_result)
+        {
+            RegistersCopy[i].Value1 = value;
+        }*//*
+        List<string> final_result = Word.DecToString(result[i]);
+        foreach (string inum in final_result)
+        {
+            RegistersCopy[0].Value1 = inum;//final_result[0];
+            RegistersCopy[1].Value2 = final_result[1];
+        }
+
+    }*/
+    /*if (i == 2)
+    {
+        List<string> final_result = Word.DecToString(result[i]);
+        foreach (string value in final_result)
+        {
+            RegistersCopy[i].Value2 = value;
+        }
+    }*/
 }
