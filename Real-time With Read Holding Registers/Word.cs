@@ -110,13 +110,20 @@ namespace Real_time_With_Read_Holding_Registers
             return booleans;
         }
 
-        public static List<List<string>> BinaryValue(byte[] bytes)
+        public static string[] BinaryValue(byte[] bytes)
         {
             string[] binary = ByteToString(bytes);
-            List<List<string>> secVal = new List<List<string>>();
-            List<string> frtVal = new List<string>();
+            return binary;
+        }
 
-            /*foreach (string value in binary)
+
+        private static string FromBytesString(byte[] bytes)
+        {
+            return Convert.ToString(bytes[1], 2).PadLeft(16, '0');
+        }
+    }
+}
+/*foreach (string value in binary)
             {
                 List<string> results = new List<string>(value.Split(' '));
                 for (int i = 0; i < results.Count - 1; i++)
@@ -132,30 +139,3 @@ namespace Real_time_With_Read_Holding_Registers
                 }
                 secVal.Add(results);
             }*/
-            for (int i = 0; i < binary.Length; i++)
-            {
-                frtVal.Clear();
-                foreach (char num in binary[i])
-                {
-                    /*if (num == '0')
-                    {
-                        frtVal.Add("manual");
-                    }
-                    else
-                    {
-                        frtVal.Add("auto");
-                    }*/
-                    frtVal.Add(num.ToString());
-                }
-                secVal.Add(frtVal);
-            }
-            return secVal;
-        }
-
-
-        private static string FromBytesString(byte[] bytes)
-        {
-            return Convert.ToString(bytes[1], 2).PadLeft(16, '0');
-        }
-    }
-}

@@ -62,20 +62,61 @@ namespace Real_time_With_Read_Holding_Registers
 
                                 byte[] name = new byte[bufferReceiver.Length - 5];
                                 string[] binary = Word.ByteToString(data);
-                                List<List<string>> binaryWithValue = Word.BinaryValue(data);
-                                for(int i = 0; i < binaryWithValue.Count; i++)
-                                {
-                                    for (int j = 0; j < binaryWithValue[i].Count; j++)
-                                    {
-                                        RegistersValue[i].Value0 = binaryWithValue[i][j];
-                                    }
-                                }
-
+                                string[] binaryWithValue = Word.BinaryValue(data);
+                                List<string> vals = new List<string>();
                                 for (int i = 0; i < result.Length; i++)
                                 {
                                     try
                                     {
-                                        /*foreach(char num in binary[i])
+                                        vals.Clear();
+                                        foreach(char num in binaryWithValue[i])
+                                        {
+                                            if (num == '0')
+                                            {
+                                                vals.Add("Manual");
+                                            }
+                                            else
+                                            {
+                                                vals.Add("Auto");
+                                            }
+                                        }
+                                        RegistersValue[i].Value0 = vals[0];
+                                        RegistersValue[i].Value1 = vals[1];
+                                        RegistersValue[i].Value2 = vals[2];
+                                        RegistersValue[i].Value3 = vals[3];
+                                        RegistersValue[i].Value4 = vals[4];
+                                        RegistersValue[i].Value5 = vals[5];
+                                        RegistersValue[i].Value6 = vals[6];
+                                        RegistersValue[i].Value7 = vals[7];
+                                        RegistersValue[i].Value8 = vals[8];
+                                        RegistersValue[i].Value9 = vals[9];
+                                        RegistersValue[i].Value10 = vals[10];
+                                        RegistersValue[i].Value11 = vals[11];
+                                        RegistersValue[i].Value12 = vals[12];
+                                        RegistersValue[i].Value13 = vals[13];
+                                        RegistersValue[i].Value14 = vals[14];
+                                        RegistersValue[i].Value15 = vals[15];
+                                        
+                                        RegistersCopy[i].Value1 = binary[i];
+                                        Registers[i].Value = result[i];
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        MessageBox.Show("From Here " + ex.Message);
+                                    }
+                                }
+                            }
+                        }
+                        Thread.Sleep(100); // Delay 100ms
+                    }
+                }));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        /*foreach(char num in binary[i])
                                         {
                                             if (num == '0')
                                             {
@@ -117,25 +158,7 @@ namespace Real_time_With_Read_Holding_Registers
                                                 RegistersValue[i].Value15 = "Auto";
                                             }
                                         }*/
-                                        RegistersCopy[i].Value1 = binary[i];
-                                        Registers[i].Value = result[i];
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        MessageBox.Show("From Here " + ex.Message);
-                                    }
-                                }
-                            }
-                        }
-                        Thread.Sleep(100); // Delay 100ms
-                    }
-                }));
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+
 
         // RegistersCopy[i].Value1 = Word.DecToBinary(result[1]).ToString();
         /// <summary>
