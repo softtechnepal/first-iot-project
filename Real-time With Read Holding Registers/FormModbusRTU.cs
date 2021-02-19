@@ -32,8 +32,8 @@ namespace Real_time_With_Read_Holding_Registers
             const uint _numberofPoints = 20;
             modbusRTUProtocol = new ModbusRTUProtocol(_numberofPoints);
             lbl40000.DataBindings.Add("Text", modbusRTUProtocol.Registers[0], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
-            lbl40001.DataBindings.Add("Text", modbusRTUProtocol.Registers[1], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
-            lbl40002.DataBindings.Add("Text", modbusRTUProtocol.Registers[2], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
+            //lbl40001.DataBindings.Add("Text", modbusRTUProtocol.Registers[1], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
+            //lbl40002.DataBindings.Add("Text", modbusRTUProtocol.Registers[2], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
             lbl40003.DataBindings.Add("Text", modbusRTUProtocol.Registers[3], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
             lbl40004.DataBindings.Add("Text", modbusRTUProtocol.Registers[4], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
             lbl40005.DataBindings.Add("Text", modbusRTUProtocol.Registers[5], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -60,9 +60,43 @@ namespace Real_time_With_Read_Holding_Registers
 
 
 
-            txt40001.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value14", true, DataSourceUpdateMode.OnPropertyChanged);
-            //txt40001.DataBindings.Add("Text", modbusRTUProtocol.RegistersCopy[1], "Value1", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40002.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value15", true, DataSourceUpdateMode.OnPropertyChanged);
+            label66.DataBindings.Add("Text", modbusRTUProtocol.RegistersCopy[1], "Value1", true, DataSourceUpdateMode.OnPropertyChanged);
+            label67.DataBindings.Add("Text", modbusRTUProtocol.RegistersCopy[2], "Value1", true, DataSourceUpdateMode.OnPropertyChanged);
+
+            reg2_1.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value0", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_2.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value1", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_3.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value2", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_4.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value3", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_5.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value4", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_6.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value5", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_7.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value6", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_8.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value7", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_9.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value8", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_10.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value9", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_11.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value10", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_12.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value11", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_13.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value12", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_14.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value13", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_15.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value14", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg2_16.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value15", true, DataSourceUpdateMode.OnPropertyChanged);
+
+            reg3_1.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value0", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_2.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value1", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_3.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value2", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_4.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value3", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_5.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value4", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_6.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value5", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_7.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value6", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_8.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value7", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_9.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value8", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_10.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value9", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_11.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value10", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_12.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value11", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_13.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value12", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_14.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value13", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_15.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value14", true, DataSourceUpdateMode.OnPropertyChanged);
+            reg3_16.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[2], "Value15", true, DataSourceUpdateMode.OnPropertyChanged);
+
 
             txt40003.DataBindings.Add("Text", modbusRTUProtocol.Registers[3], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
             txt40004.DataBindings.Add("Text", modbusRTUProtocol.Registers[4], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -152,3 +186,20 @@ namespace Real_time_With_Read_Holding_Registers
         }
     }
 }
+/*
+ txt40003.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value2", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40004.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value3", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40005.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value4", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40006.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value5", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40007.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value6", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40008.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value7", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40009.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value8", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40010.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value9", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40011.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value10", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40012.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value11", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40013.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value12", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40014.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value13", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40015.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value14", true, DataSourceUpdateMode.OnPropertyChanged);
+            txt40016.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value15", true, DataSourceUpdateMode.OnPropertyChanged);
+
+ */

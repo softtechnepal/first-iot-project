@@ -80,6 +80,7 @@ namespace Real_time_With_Read_Holding_Registers
                                                 vals.Add("Auto");
                                             }
                                         }
+                                        RegistersCopy[i].Value1 = binaryWithValue[i];
                                         RegistersValue[i].Value0 = vals[0];
                                         RegistersValue[i].Value1 = vals[1];
                                         RegistersValue[i].Value2 = vals[2];

@@ -116,10 +116,9 @@ namespace Real_time_With_Read_Holding_Registers
             return binary;
         }
 
-
         private static string FromBytesString(byte[] bytes)
         {
-            return Convert.ToString(bytes[1], 2).PadLeft(16, '0');
+            return Convert.ToString(bytes[0]*256 + bytes[1], 2).PadLeft(16, '0');
         }
     }
 }
