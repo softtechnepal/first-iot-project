@@ -15,6 +15,7 @@ namespace Real_time_With_Read_Holding_Registers
         {
             InitializeComponent();
             TextBox.CheckForIllegalCrossThreadCalls = false;
+            timer1.Start();
         }
         private void ToInt(object sender, ConvertEventArgs cevent)
         {
@@ -27,13 +28,9 @@ namespace Real_time_With_Read_Holding_Registers
         }
         private void FormModbusRTU_Load(object sender, EventArgs e)
         {
-            /*try
-            {*/
             const uint _numberofPoints = 20;
             modbusRTUProtocol = new ModbusRTUProtocol(_numberofPoints);
-            lbl40000.DataBindings.Add("Text", modbusRTUProtocol.Registers[0], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
-            //lbl40001.DataBindings.Add("Text", modbusRTUProtocol.Registers[1], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
-            //lbl40002.DataBindings.Add("Text", modbusRTUProtocol.Registers[2], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
+            /*lbl40000.DataBindings.Add("Text", modbusRTUProtocol.Registers[0], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
             lbl40003.DataBindings.Add("Text", modbusRTUProtocol.Registers[3], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
             lbl40004.DataBindings.Add("Text", modbusRTUProtocol.Registers[4], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
             lbl40005.DataBindings.Add("Text", modbusRTUProtocol.Registers[5], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -52,13 +49,8 @@ namespace Real_time_With_Read_Holding_Registers
             lbl40018.DataBindings.Add("Text", modbusRTUProtocol.Registers[18], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
             lbl40019.DataBindings.Add("Text", modbusRTUProtocol.Registers[19], "Address", true, DataSourceUpdateMode.OnPropertyChanged);
 
-            Binding binding = new Binding("Text", modbusRTUProtocol.Registers[0], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
-            binding.Parse += new ConvertEventHandler(ToInt);
-
 
             txt40000.DataBindings.Add(new Binding("Text", modbusRTUProtocol.Registers[0], "Value", true, DataSourceUpdateMode.OnPropertyChanged));
-
-
 
             label66.DataBindings.Add("Text", modbusRTUProtocol.RegistersCopy[1], "Value1", true, DataSourceUpdateMode.OnPropertyChanged);
             label67.DataBindings.Add("Text", modbusRTUProtocol.RegistersCopy[2], "Value1", true, DataSourceUpdateMode.OnPropertyChanged);
@@ -114,68 +106,13 @@ namespace Real_time_With_Read_Holding_Registers
             txt40016.DataBindings.Add("Text", modbusRTUProtocol.Registers[16], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
             txt40017.DataBindings.Add("Text", modbusRTUProtocol.Registers[17], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
             txt40018.DataBindings.Add("Text", modbusRTUProtocol.Registers[18], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40019.DataBindings.Add("Text", modbusRTUProtocol.Registers[19], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
-
-
-            //string result = DecToBinary(decimalNumber).ToString();
+            txt40019.DataBindings.Add("Text", modbusRTUProtocol.Registers[19], "Value", true, DataSourceUpdateMode.OnPropertyChanged);*/
+            button5.DataBindings.Add("Text", modbusRTUProtocol.Registers[1], "Value", true, DataSourceUpdateMode.OnPropertyChanged);
 
             modbusRTUProtocol.Start();
-            //}
-            /*catch (Exception ex)
-            {
-                MessageBox.Show("Here " + ex.Message);
-            }*/
-            /*label6.DataBindings.Add("Text", txt40000, "Text");*/
-            ///String one = GetStatus(ushort.Parse(txt40000.Text));
-
-            //label6.Text = one;
-        }
-
-        private void myScheduleView_PropertyChanged(Object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "HorizontalOffset" ||
-               e.PropertyName == "VerticalOffset")
-            {
-                //TODO: something
-            }
-        }
-
-        private static String GetStatus(ushort num)
-        {
-            string result = DecToBinary(num).ToString();
-
-            List<string> results = new List<string>(result.Trim().Split(' '));
-            List<int> bits = results.ConvertAll(int.Parse);
-
-            if (bits[15] == 0)
-            {
-                return "Manual";
-            }
-            else
-            {
-                return "Auto";
-            }
-        }
-        private static StringBuilder DecToBinary(ushort n)
-        {
-            var result = new StringBuilder();
-            for (int i = 15; i >= 0; i--)
-            {
-                int k = n >> i;
-                if ((k & 1) > 0)
-                    result.Append("1 ");
-                else
-                    result.Append("0 ");
-            }
-            return result;
         }
 
         private void FormModbusRTU_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
         {
 
         }
@@ -184,22 +121,25 @@ namespace Real_time_With_Read_Holding_Registers
         {
 
         }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            dt.ToString("hh:mm:ss");
+
+            this.lblTimeShow.Text = dt.ToString("hh:mm:ss");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            modbusRTUProtocol.Stop();
+            pictureBox1.Image = Properties.Resources.stop;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            modbusRTUProtocol.Open();
+            pictureBox1.Image = Properties.Resources.undershot;
+        }
     }
 }
-/*
- txt40003.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value2", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40004.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value3", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40005.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value4", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40006.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value5", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40007.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value6", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40008.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value7", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40009.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value8", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40010.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value9", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40011.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value10", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40012.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value11", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40013.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value12", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40014.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value13", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40015.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value14", true, DataSourceUpdateMode.OnPropertyChanged);
-            txt40016.DataBindings.Add("Text", modbusRTUProtocol.RegistersValue[1], "Value15", true, DataSourceUpdateMode.OnPropertyChanged);
-
- */
